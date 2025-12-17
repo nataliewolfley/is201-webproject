@@ -1,764 +1,886 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vibe Quest</title>
   <style>
-    :root{
-      --bg1:#0b1020;
-      --bg2:#121a33;
-      --card:#0f1730cc;
-      --stroke:#2b3766;
-      --text:#eaf0ff;
-      --muted:#a8b3d7;
-      --accent:#7c5cff;
-      --accent2:#3cf0c5;
-      --danger:#ff4d6d;
-      --good:#2ee59d;
-      --shadow: 0 18px 60px rgba(0,0,0,.35);
+    :root {
+      --bg1: #0b1020;
+      --bg2: #121a33;
+      --card: #0f1730cc;
+      --stroke: #2b3766;
+      --text: #eaf0ff;
+      --muted: #a8b3d7;
+      --accent: #7c5cff;
+      --accent2: #3cf0c5;
+      --danger: #ff4d6d;
+      --good: #2ee59d;
+      --shadow: 0 18px 60px rgba(0, 0, 0, .35);
       --radius: 18px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:var(--sans);
-      color:var(--text);
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
       background:
         radial-gradient(1200px 800px at 20% 10%, #3b2cff33, transparent 60%),
         radial-gradient(1200px 800px at 90% 30%, #3cf0c522, transparent 55%),
         radial-gradient(1200px 900px at 40% 120%, #ff4d6d18, transparent 60%),
         linear-gradient(180deg, var(--bg1), var(--bg2));
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-    }
-    .wrap{width:min(980px, 100%);}
-    header{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:16px; margin-bottom:18px;
-    }
-    h1{
-      margin:0;
-      letter-spacing:-.02em;
-      font-size: clamp(28px, 3.5vw, 44px);
-      line-height:1.05;
-    }
-    .subtitle{
-      margin-top:8px;
-      color:var(--muted);
-      max-width:62ch;
-      font-size:14px;
-    }
-    .chiprow{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
-    .chip{
-      border:1px solid var(--stroke);
-      background:linear-gradient(180deg, #121a33aa, #0f1730aa);
-      padding:8px 10px;
-      border-radius:999px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-      font-family:var(--mono);
-      font-size:12px;
-      color:var(--muted);
-      user-select:none;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
 
-    .grid{
-      display:grid;
+    .wrap {
+      width: min(980px, 100%);
+    }
+
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      letter-spacing: -.02em;
+      font-size: clamp(28px, 3.5vw, 44px);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      max-width: 62ch;
+      font-size: 14px;
+    }
+
+    .chiprow {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .chip {
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, #121a33aa, #0f1730aa);
+      padding: 8px 10px;
+      border-radius: 999px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      user-select: none;
+    }
+
+    .grid {
+      display: grid;
       grid-template-columns: 1.05fr .95fr;
-      gap:16px;
+      gap: 16px;
     }
-    @media (max-width: 860px){
-      .grid{grid-template-columns: 1fr; }
-      .chiprow{justify-content:flex-start;}
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chiprow {
+        justify-content: flex-start;
+      }
     }
-    .card{
+
+    .card {
       background: var(--card);
-      border:1px solid var(--stroke);
+      border: 1px solid var(--stroke);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
+      overflow: hidden;
+      position: relative;
     }
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
       background: conic-gradient(from 210deg, transparent, #7c5cff55, #3cf0c533, transparent, #ff4d6d33, transparent);
       filter: blur(18px);
-      opacity:.55;
-      z-index:0;
+      opacity: .55;
+      z-index: 0;
     }
-    .card > *{position:relative; z-index:1;}
-    .cardhead{
-      padding:18px 18px 12px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
+
+    .card>* {
+      position: relative;
+      z-index: 1;
     }
-    .label{
-      font-family:var(--mono);
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:var(--muted);
+
+    .cardhead {
+      padding: 18px 18px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
-    .content{padding:0 18px 18px;}
-    .controls{
-      display:grid;
+
+    .label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .content {
+      padding: 0 18px 18px;
+    }
+
+    .controls {
+      display: grid;
       grid-template-columns: 1fr 1fr;
-      gap:12px;
-      margin-top:10px;
+      gap: 12px;
+      margin-top: 10px;
     }
-    @media (max-width: 520px){
-      .controls{grid-template-columns:1fr;}
+
+    @media (max-width: 520px) {
+      .controls {
+        grid-template-columns: 1fr;
+      }
     }
-    .field{
-      border:1px solid var(--stroke);
-      border-radius:14px;
-      padding:12px;
-      background:linear-gradient(180deg, #0f1730cc, #0b1228cc);
+
+    .field {
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      padding: 12px;
+      background: linear-gradient(180deg, #0f1730cc, #0b1228cc);
     }
-    .field label{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      color:var(--muted);
-      font-size:12px;
-      font-family:var(--mono);
-      margin-bottom:8px;
+
+    .field label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+      font-family: var(--mono);
+      margin-bottom: 8px;
     }
-    select, input[type="number"], input[type="text"]{
-      width:100%;
-      border:1px solid #364377;
-      background:#0b1228;
-      color:var(--text);
-      border-radius:12px;
-      padding:10px 12px;
-      outline:none;
-      font-size:14px;
+
+    select,
+    input[type="number"],
+    input[type="text"] {
+      width: 100%;
+      border: 1px solid #364377;
+      background: #0b1228;
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 12px;
+      outline: none;
+      font-size: 14px;
     }
-    input[type="range"]{width:100%;}
-    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
-    button{
-      border:1px solid #364377;
-      background:linear-gradient(180deg, #1a2550, #101a3a);
-      color:var(--text);
-      border-radius:14px;
-      padding:11px 13px;
-      cursor:pointer;
-      font-weight:600;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    .btnrow {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    button {
+      border: 1px solid #364377;
+      background: linear-gradient(180deg, #1a2550, #101a3a);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 11px 13px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
       transition: transform .06s ease, filter .2s ease;
     }
-    button:hover{filter:brightness(1.08)}
-    button:active{transform: translateY(1px)}
-    .primary{
-      border-color:#5a47ff;
-      background:linear-gradient(180deg, #7c5cff, #4b2cff);
+
+    button:hover {
+      filter: brightness(1.08)
     }
-    .ghost{
-      background:transparent;
-      border-color:#364377;
+
+    button:active {
+      transform: translateY(1px)
     }
-    .danger{
-      border-color:#ff4d6d;
-      background:linear-gradient(180deg, #ff4d6d, #b01d39);
+
+    .primary {
+      border-color: #5a47ff;
+      background: linear-gradient(180deg, #7c5cff, #4b2cff);
     }
-    .quest{
-      border:1px dashed #3f4a7f;
-      border-radius:16px;
-      padding:14px;
-      background:linear-gradient(180deg, #0b1228aa, #0b122855);
-      margin-top:10px;
+
+    .ghost {
+      background: transparent;
+      border-color: #364377;
     }
-    .quest h2{margin:0 0 8px; font-size:20px; letter-spacing:-.01em;}
-    .quest p{margin:6px 0; color:var(--muted); line-height:1.4;}
-    .meta{
-      display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;
-      font-family:var(--mono); font-size:12px; color:var(--muted);
+
+    .danger {
+      border-color: #ff4d6d;
+      background: linear-gradient(180deg, #ff4d6d, #b01d39);
     }
-    .pill{
-      border:1px solid #364377;
-      padding:6px 8px;
-      border-radius:999px;
-      background:#0b1228;
+
+    .quest {
+      border: 1px dashed #3f4a7f;
+      border-radius: 16px;
+      padding: 14px;
+      background: linear-gradient(180deg, #0b1228aa, #0b122855);
+      margin-top: 10px;
     }
-    .timer{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      border:1px solid var(--stroke);
-      border-radius:16px;
-      padding:12px 14px;
-      margin-top:12px;
-      background:linear-gradient(180deg, #0f1730cc, #0b1228cc);
-      font-family:var(--mono);
+
+    .quest h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      letter-spacing: -.01em;
     }
-    .time{
-      font-size:22px;
-      letter-spacing:.04em;
+
+    .quest p {
+      margin: 6px 0;
+      color: var(--muted);
+      line-height: 1.4;
     }
-    .tiny{font-size:12px; color:var(--muted);}
-    .progress{
-      height:10px;
-      background:#0b1228;
-      border:1px solid #364377;
-      border-radius:999px;
-      overflow:hidden;
-      margin-top:10px;
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
     }
-    .bar{
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg, var(--accent), var(--accent2));
+
+    .pill {
+      border: 1px solid #364377;
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: #0b1228;
+    }
+
+    .timer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-top: 12px;
+      background: linear-gradient(180deg, #0f1730cc, #0b1228cc);
+      font-family: var(--mono);
+    }
+
+    .time {
+      font-size: 22px;
+      letter-spacing: .04em;
+    }
+
+    .tiny {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .progress {
+      height: 10px;
+      background: #0b1228;
+      border: 1px solid #364377;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
       transition: width .25s ease;
     }
 
-    .side{
-      display:flex;
-      flex-direction:column;
-      gap:16px;
+    .side {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
-    .history{
-      padding:0 18px 18px;
+
+    .history {
+      padding: 0 18px 18px;
     }
-    .histlist{
-      margin-top:10px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+
+    .histlist {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       max-height: 330px;
-      overflow:auto;
-      padding-right:4px;
+      overflow: auto;
+      padding-right: 4px;
     }
-    .item{
-      border:1px solid var(--stroke);
-      border-radius:14px;
-      padding:10px 12px;
-      background:linear-gradient(180deg, #0f1730cc, #0b1228cc);
+
+    .item {
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: linear-gradient(180deg, #0f1730cc, #0b1228cc);
     }
-    .itemtop{
-      display:flex; justify-content:space-between; gap:10px;
-      font-family:var(--mono); font-size:12px; color:var(--muted);
-      margin-bottom:6px;
+
+    .itemtop {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
     }
-    .itemtitle{
-      font-weight:700;
-      color:var(--text);
-      font-family:var(--sans);
-      font-size:14px;
-      margin:0;
+
+    .itemtitle {
+      font-weight: 700;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      margin: 0;
     }
-    .empty{
-      color:var(--muted);
-      font-size:14px;
-      padding:10px 0;
+
+    .empty {
+      color: var(--muted);
+      font-size: 14px;
+      padding: 10px 0;
     }
-    canvas#confetti{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:99;
+
+    canvas#confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 99;
     }
-    .footerhint{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:12px;
-      font-family:var(--mono);
+
+    .footerhint {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      font-family: var(--mono);
+    }
+    .nav-btn{
+      margin-bottom: 12px;
+      
+    }
+    .nav-btn a {
+        color: white;
     }
   </style>
 </head>
+
 <body>
-<canvas id="confetti"></canvas>
-<div class="wrap">
-  <header>
-    <div>
-      <h1>Vibe Quest</h1>
-      <div class="subtitle">Pick a mood, time, and “where you are” — get a tiny adventure. Finish it to earn confetti + a streak.</div>
-    </div>
-    <div class="chiprow">
-      <div class="chip" id="streakChip">STREAK: 0</div>
-      <div class="chip" id="doneChip">DONE: 0</div>
-      <div class="chip" id="todayChip">TODAY: —</div>
-    </div>
-  </header>
-
-  <div class="grid">
-    <!-- MAIN -->
-    <section class="card">
-      <div class="cardhead">
-        <div class="label">Quest Builder</div>
-        <div class="label" id="seedLabel">seed: —</div>
+  <canvas id="confetti"></canvas>
+  <div class="wrap">
+    
+      <nav class="flex nav-btn">
+        <a href="../index.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="aboutMe.html">About Me</a>
+        <a href="game.html">Quest Generator</a>
+      </nav>
+    
+    <header>
+      <div>
+        <h1>Vibe Quest</h1>
+        <div class="subtitle">Pick a mood, time, and “where you are” — get a tiny adventure. Finish it to earn confetti
+          + a streak.</div>
       </div>
-      <div class="content">
-        <div class="controls">
-          <div class="field">
-            <label>
-              <span>Mood</span>
-              <span class="tiny">what you want to feel</span>
-            </label>
-            <select id="mood">
-              <option value="cozy">Cozy</option>
-              <option value="productive">Productive</option>
-              <option value="social">Social</option>
-              <option value="adventurous">Adventurous</option>
-              <option value="reset">Reset</option>
-              <option value="romantic">Romantic</option>
-              <option value="creative">Creative</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label>
-              <span>Location</span>
-              <span class="tiny">where you are</span>
-            </label>
-            <select id="location">
-              <option value="home">Home</option>
-              <option value="campus">Campus</option>
-              <option value="city">City / Errands</option>
-              <option value="outdoors">Outdoors</option>
-              <option value="anywhere">Anywhere</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label>
-              <span>Time (minutes)</span>
-              <span class="tiny">how long you have</span>
-            </label>
-            <input id="minutes" type="number" min="3" max="90" value="12" />
-          </div>
-
-          <div class="field">
-            <label>
-              <span>Difficulty</span>
-              <span class="tiny" id="diffText">3 / 10</span>
-            </label>
-            <input id="difficulty" type="range" min="1" max="10" value="3" />
-          </div>
-
-          <div class="field" style="grid-column:1 / -1;">
-            <label>
-              <span>Personalization</span>
-              <span class="tiny">optional</span>
-            </label>
-            <input id="name" type="text" placeholder="e.g., Nat • loves fashion • studying at BYU" />
-            <div class="footerhint">Tip: add one detail (music, fashion, finals week, etc.) to make quests feel custom.</div>
-          </div>
-        </div>
-
-        <div class="btnrow">
-          <button class="primary" id="generateBtn">Generate Quest</button>
-          <button class="ghost" id="rerollBtn" disabled>Reroll Variation</button>
-          <button class="ghost" id="startBtn" disabled>Start Timer</button>
-          <button class="danger" id="abandonBtn" disabled>Abandon</button>
-          <button class="ghost" id="clearBtn">Clear History</button>
-        </div>
-
-        <div class="quest" id="questBox" style="display:none;">
-          <h2 id="questTitle">Quest Title</h2>
-          <p id="questDesc">Quest description.</p>
-          <div class="meta">
-            <span class="pill" id="questMood">mood: —</span>
-            <span class="pill" id="questLoc">location: —</span>
-            <span class="pill" id="questDiff">difficulty: —</span>
-            <span class="pill" id="questTime">time: —</span>
-          </div>
-
-          <div class="timer" id="timerBox" style="display:none;">
-            <div>
-              <div class="tiny">time remaining</div>
-              <div class="time" id="timeLeft">00:00</div>
-            </div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
-              <button class="ghost" id="pauseBtn">Pause</button>
-              <button class="primary" id="finishBtn">Mark Complete</button>
-            </div>
-          </div>
-
-          <div class="progress" id="progressBox" style="display:none;">
-            <div class="bar" id="bar"></div>
-          </div>
-        </div>
+      <div class="chiprow">
+        <div class="chip" id="streakChip">STREAK: 0</div>
+        <div class="chip" id="doneChip">DONE: 0</div>
+        <div class="chip" id="todayChip">TODAY: —</div>
       </div>
-    </section>
+    </header>
 
-    <!-- SIDE -->
-    <aside class="side">
+    <div class="grid">
+      <!-- MAIN -->
       <section class="card">
         <div class="cardhead">
-          <div class="label">Quest Log</div>
-          <div class="label" id="logLabel">saved locally</div>
-        </div>
-        <div class="history">
-          <div class="tiny">Your completed quests live in your browser (localStorage). No account needed.</div>
-          <div class="histlist" id="histList"></div>
-          <div class="empty" id="emptyMsg">No completed quests yet. Generate one and finish it 🙂</div>
-        </div>
-      </section>
-
-      <section class="card">
-        <div class="cardhead">
-          <div class="label">How to earn “Full Credit” vibes</div>
-          <div class="label">✅</div>
+          <div class="label">Quest Builder</div>
+          <div class="label" id="seedLabel">seed: —</div>
         </div>
         <div class="content">
-          <p style="margin:0;color:var(--muted);line-height:1.5;">
-            This app isn’t just a generator: it has a designed UI, timer + progress,
-            confetti celebration, and persistent history + streak logic. Edit the quest library,
-            add a new mood, or improve the scoring — that’s your creative contribution.
-          </p>
+          <div class="controls">
+            <div class="field">
+              <label>
+                <span>Mood</span>
+                <span class="tiny">what you want to feel</span>
+              </label>
+              <select id="mood">
+                <option value="cozy">Cozy</option>
+                <option value="productive">Productive</option>
+                <option value="social">Social</option>
+                <option value="adventurous">Adventurous</option>
+                <option value="reset">Reset</option>
+                <option value="romantic">Romantic</option>
+                <option value="creative">Creative</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>
+                <span>Location</span>
+                <span class="tiny">where you are</span>
+              </label>
+              <select id="location">
+                <option value="home">Home</option>
+                <option value="campus">Campus</option>
+                <option value="city">City / Errands</option>
+                <option value="outdoors">Outdoors</option>
+                <option value="anywhere">Anywhere</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>
+                <span>Time (minutes)</span>
+                <span class="tiny">how long you have</span>
+              </label>
+              <input id="minutes" type="number" min="3" max="90" value="12" />
+            </div>
+
+            <div class="field">
+              <label>
+                <span>Difficulty</span>
+                <span class="tiny" id="diffText">3 / 10</span>
+              </label>
+              <input id="difficulty" type="range" min="1" max="10" value="3" />
+            </div>
+
+            <div class="field" style="grid-column:1 / -1;">
+              <label>
+                <span>Personalization</span>
+                <span class="tiny">optional</span>
+              </label>
+              <input id="name" type="text" placeholder="e.g., Nat • loves fashion • studying at BYU" />
+              <div class="footerhint">Tip: add one detail (music, fashion, finals week, etc.) to make quests feel
+                custom.</div>
+            </div>
+          </div>
+
+          <div class="btnrow">
+            <button class="primary" id="generateBtn">Generate Quest</button>
+            <button class="ghost" id="rerollBtn" disabled>Reroll Variation</button>
+            <button class="ghost" id="startBtn" disabled>Start Timer</button>
+            <button class="danger" id="abandonBtn" disabled>Abandon</button>
+            <button class="ghost" id="clearBtn">Clear History</button>
+          </div>
+
+          <div class="quest" id="questBox" style="display:none;">
+            <h2 id="questTitle">Quest Title</h2>
+            <p id="questDesc">Quest description.</p>
+            <div class="meta">
+              <span class="pill" id="questMood">mood: —</span>
+              <span class="pill" id="questLoc">location: —</span>
+              <span class="pill" id="questDiff">difficulty: —</span>
+              <span class="pill" id="questTime">time: —</span>
+            </div>
+
+            <div class="timer" id="timerBox" style="display:none;">
+              <div>
+                <div class="tiny">time remaining</div>
+                <div class="time" id="timeLeft">00:00</div>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+                <button class="ghost" id="pauseBtn">Pause</button>
+                <button class="primary" id="finishBtn">Mark Complete</button>
+              </div>
+            </div>
+
+            <div class="progress" id="progressBox" style="display:none;">
+              <div class="bar" id="bar"></div>
+            </div>
+          </div>
         </div>
       </section>
-    </aside>
+
+      <!-- SIDE -->
+      <aside class="side">
+        <section class="card">
+          <div class="cardhead">
+            <div class="label">Quest Log</div>
+            <div class="label" id="logLabel">saved locally</div>
+          </div>
+          <div class="history">
+            <div class="tiny">Your completed quests live in your browser (localStorage). No account needed.</div>
+            <div class="histlist" id="histList"></div>
+            <div class="empty" id="emptyMsg">No completed quests yet. Generate one and finish it 🙂</div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="cardhead">
+            <div class="label">How to earn “Full Credit” vibes</div>
+            <div class="label">✅</div>
+          </div>
+          <div class="content">
+            <p style="margin:0;color:var(--muted);line-height:1.5;">
+              This app isn’t just a generator: it has a designed UI, timer + progress,
+              confetti celebration, and persistent history + streak logic. Edit the quest library,
+              add a new mood, or improve the scoring — that’s your creative contribution.
+            </p>
+          </div>
+        </section>
+      </aside>
+    </div>
   </div>
-</div>
 
-<script>
-/* ---------------------------
-   Vibe Quest — single page app
-   Features: seeded randomness, timer, confetti, localStorage history, streaks
-----------------------------*/
+  <script>
+    /* ---------------------------
+       Vibe Quest — single page app
+       Features: seeded randomness, timer, confetti, localStorage history, streaks
+    ----------------------------*/
 
-const els = {
-  mood: document.getElementById("mood"),
-  location: document.getElementById("location"),
-  minutes: document.getElementById("minutes"),
-  difficulty: document.getElementById("difficulty"),
-  diffText: document.getElementById("diffText"),
-  name: document.getElementById("name"),
+    const els = {
+      mood: document.getElementById("mood"),
+      location: document.getElementById("location"),
+      minutes: document.getElementById("minutes"),
+      difficulty: document.getElementById("difficulty"),
+      diffText: document.getElementById("diffText"),
+      name: document.getElementById("name"),
 
-  generateBtn: document.getElementById("generateBtn"),
-  rerollBtn: document.getElementById("rerollBtn"),
-  startBtn: document.getElementById("startBtn"),
-  abandonBtn: document.getElementById("abandonBtn"),
-  clearBtn: document.getElementById("clearBtn"),
+      generateBtn: document.getElementById("generateBtn"),
+      rerollBtn: document.getElementById("rerollBtn"),
+      startBtn: document.getElementById("startBtn"),
+      abandonBtn: document.getElementById("abandonBtn"),
+      clearBtn: document.getElementById("clearBtn"),
 
-  questBox: document.getElementById("questBox"),
-  questTitle: document.getElementById("questTitle"),
-  questDesc: document.getElementById("questDesc"),
-  questMood: document.getElementById("questMood"),
-  questLoc: document.getElementById("questLoc"),
-  questDiff: document.getElementById("questDiff"),
-  questTime: document.getElementById("questTime"),
+      questBox: document.getElementById("questBox"),
+      questTitle: document.getElementById("questTitle"),
+      questDesc: document.getElementById("questDesc"),
+      questMood: document.getElementById("questMood"),
+      questLoc: document.getElementById("questLoc"),
+      questDiff: document.getElementById("questDiff"),
+      questTime: document.getElementById("questTime"),
 
-  timerBox: document.getElementById("timerBox"),
-  timeLeft: document.getElementById("timeLeft"),
-  pauseBtn: document.getElementById("pauseBtn"),
-  finishBtn: document.getElementById("finishBtn"),
-  progressBox: document.getElementById("progressBox"),
-  bar: document.getElementById("bar"),
+      timerBox: document.getElementById("timerBox"),
+      timeLeft: document.getElementById("timeLeft"),
+      pauseBtn: document.getElementById("pauseBtn"),
+      finishBtn: document.getElementById("finishBtn"),
+      progressBox: document.getElementById("progressBox"),
+      bar: document.getElementById("bar"),
 
-  histList: document.getElementById("histList"),
-  emptyMsg: document.getElementById("emptyMsg"),
+      histList: document.getElementById("histList"),
+      emptyMsg: document.getElementById("emptyMsg"),
 
-  streakChip: document.getElementById("streakChip"),
-  doneChip: document.getElementById("doneChip"),
-  todayChip: document.getElementById("todayChip"),
-  seedLabel: document.getElementById("seedLabel"),
-};
+      streakChip: document.getElementById("streakChip"),
+      doneChip: document.getElementById("doneChip"),
+      todayChip: document.getElementById("todayChip"),
+      seedLabel: document.getElementById("seedLabel"),
+    };
 
-const STORAGE_KEY = "vibeQuest.history.v1";
+    const STORAGE_KEY = "vibeQuest.history.v1";
 
-function todayISO(){
-  const d = new Date();
-  const yyyy = d.getFullYear();
-  const mm = String(d.getMonth()+1).padStart(2,"0");
-  const dd = String(d.getDate()).padStart(2,"0");
-  return `${yyyy}-${mm}-${dd}`;
-}
+    function todayISO() {
+      const d = new Date();
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, "0");
+      const dd = String(d.getDate()).padStart(2, "0");
+      return `${yyyy}-${mm}-${dd}`;
+    }
 
-els.todayChip.textContent = `TODAY: ${todayISO()}`;
+    els.todayChip.textContent = `TODAY: ${todayISO()}`;
 
-els.difficulty.addEventListener("input", () => {
-  els.diffText.textContent = `${els.difficulty.value} / 10`;
-});
+    els.difficulty.addEventListener("input", () => {
+      els.diffText.textContent = `${els.difficulty.value} / 10`;
+    });
 
-function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+    function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
 
-// seeded RNG (mulberry32)
-function mulberry32(seed){
-  return function(){
-    let t = seed += 0x6D2B79F5;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  }
-}
-function hashStringToSeed(str){
-  // simple hash
-  let h = 2166136261;
-  for (let i=0;i<str.length;i++){
-    h ^= str.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return h >>> 0;
-}
+    // seeded RNG (mulberry32)
+    function mulberry32(seed) {
+      return function () {
+        let t = seed += 0x6D2B79F5;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      }
+    }
+    function hashStringToSeed(str) {
+      // simple hash
+      let h = 2166136261;
+      for (let i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return h >>> 0;
+    }
 
-const QUESTS = {
-  cozy: {
-    home: [
-      ["Candlelight Reset", "Make a warm drink, put on one song you love, and tidy one small surface until it looks *magazine clean*."],
-      ["Soft-Life Upgrade", "Change into comfiest clothes, open a window for 2 minutes, then write 5 “tiny wins” from today."],
-      ["Chef Mode Mini", "Assemble a snack plate: something crunchy, something sweet, something protein. Eat it *slowly*."],
-    ],
-    campus: [
-      ["Library Cozy Run", "Find the coziest seat you can. Read 3 pages of anything non-school."],
-      ["Warm Walk Loop", "Take a 7-minute loop and notice 5 lights, 4 sounds, 3 smells, 2 textures, 1 grateful thought."],
-      ["Quiet Corner Recharge", "Sit somewhere calm. Put your phone face down. Breathe in 4 counts, out 6 counts for 3 minutes."],
-    ],
-    city: [
-      ["Errand + Treat", "Do one annoying errand and reward yourself with a small treat (hot chocolate, pastry, or playlist)."],
-      ["Window-Shop Inspiration", "Find 3 items that match your dream aesthetic and screenshot them for later inspiration."],
-      ["Cozy Observation", "Sit for 5 minutes and people-watch like you’re writing a novel. Invent a backstory for 1 person."],
-    ],
-    outdoors: [
-      ["Golden Hour Hunt", "Find the best light. Take 3 photos of ordinary things that look cinematic."],
-      ["Nature Texture Quest", "Collect (mentally) 6 textures: bark, leaf, stone, sky, water, wind. Describe each in 1 word."],
-      ["Slow Steps", "Walk slower than usual for 5 minutes. Try to spot 10 small details you normally miss."],
-    ],
-    anywhere: [
-      ["Micro-Meditation", "Set a 3-minute timer. Only job: breathe and unclench your jaw/shoulders."],
-      ["Message Someone", "Send one kind message to someone you love. No agenda. Just warmth."],
-      ["Soundtrack Moment", "Pick a song. Pretend you’re in a movie montage for the whole track."],
-    ]
-  },
+    const QUESTS = {
+      cozy: {
+        home: [
+          ["Candlelight Reset", "Make a warm drink, put on one song you love, and tidy one small surface until it looks *magazine clean*."],
+          ["Soft-Life Upgrade", "Change into comfiest clothes, open a window for 2 minutes, then write 5 “tiny wins” from today."],
+          ["Chef Mode Mini", "Assemble a snack plate: something crunchy, something sweet, something protein. Eat it *slowly*."],
+        ],
+        campus: [
+          ["Library Cozy Run", "Find the coziest seat you can. Read 3 pages of anything non-school."],
+          ["Warm Walk Loop", "Take a 7-minute loop and notice 5 lights, 4 sounds, 3 smells, 2 textures, 1 grateful thought."],
+          ["Quiet Corner Recharge", "Sit somewhere calm. Put your phone face down. Breathe in 4 counts, out 6 counts for 3 minutes."],
+        ],
+        city: [
+          ["Errand + Treat", "Do one annoying errand and reward yourself with a small treat (hot chocolate, pastry, or playlist)."],
+          ["Window-Shop Inspiration", "Find 3 items that match your dream aesthetic and screenshot them for later inspiration."],
+          ["Cozy Observation", "Sit for 5 minutes and people-watch like you’re writing a novel. Invent a backstory for 1 person."],
+        ],
+        outdoors: [
+          ["Golden Hour Hunt", "Find the best light. Take 3 photos of ordinary things that look cinematic."],
+          ["Nature Texture Quest", "Collect (mentally) 6 textures: bark, leaf, stone, sky, water, wind. Describe each in 1 word."],
+          ["Slow Steps", "Walk slower than usual for 5 minutes. Try to spot 10 small details you normally miss."],
+        ],
+        anywhere: [
+          ["Micro-Meditation", "Set a 3-minute timer. Only job: breathe and unclench your jaw/shoulders."],
+          ["Message Someone", "Send one kind message to someone you love. No agenda. Just warmth."],
+          ["Soundtrack Moment", "Pick a song. Pretend you’re in a movie montage for the whole track."],
+        ]
+      },
 
-  productive: {
-    home: [
-      ["The 12-Minute Sprint", "Pick 1 task. Set a timer for your chosen minutes. No switching. Stop when it rings."],
-      ["Inbox Armor", "Clear 10 emails/texts/notifications. Delete or respond fast. No deep writing."],
-      ["Desk Glow-Up", "Reset your workspace: trash, wipe, stack, align. Make it *cute*."],
-    ],
-    campus: [
-      ["Power Study Block", "Choose 1 chapter/topic. Write 5 questions you want answered, then hunt answers."],
-      ["Office Hours Bravery", "If you have a class question, send it or ask it. Future-you will be grateful."],
-      ["Assignment Warm-Up", "Open the assignment. Only do the first tiny step (title, outline, or first problem)."],
-    ],
-    city: [
-      ["Errand Efficiency", "Bundle 2 errands into one loop. Play one pump-up song before you start."],
-      ["Finance Check-In", "Review your last 5 transactions and label them: need / nice / nope."],
-      ["Future Self Setup", "Buy/prepare 1 thing that makes tomorrow easier (snack, planner, refill, etc.)."],
-    ],
-    outdoors: [
-      ["Walk & Plan", "Walk 10 minutes and voice-note your top 3 priorities + the next action for each."],
-      ["Reset with Sunlight", "Get 5 minutes of daylight. While walking, list 5 things you’re handling well."],
-      ["Brain Dump Bench", "Sit and brain-dump everything on your mind. Then star only the top 3."],
-    ],
-    anywhere: [
-      ["2-Minute Rule", "Do one task that takes <2 minutes right now (email, refill water, put away clothes)."],
-      ["No-Scroll Focus", "Turn on Do Not Disturb for your chosen minutes. Do one thing start-to-finish."],
-      ["Tiny Organization", "Organize one micro-area: your bag pocket, desktop folder, or camera roll."],
-    ]
-  },
+      productive: {
+        home: [
+          ["The 12-Minute Sprint", "Pick 1 task. Set a timer for your chosen minutes. No switching. Stop when it rings."],
+          ["Inbox Armor", "Clear 10 emails/texts/notifications. Delete or respond fast. No deep writing."],
+          ["Desk Glow-Up", "Reset your workspace: trash, wipe, stack, align. Make it *cute*."],
+        ],
+        campus: [
+          ["Power Study Block", "Choose 1 chapter/topic. Write 5 questions you want answered, then hunt answers."],
+          ["Office Hours Bravery", "If you have a class question, send it or ask it. Future-you will be grateful."],
+          ["Assignment Warm-Up", "Open the assignment. Only do the first tiny step (title, outline, or first problem)."],
+        ],
+        city: [
+          ["Errand Efficiency", "Bundle 2 errands into one loop. Play one pump-up song before you start."],
+          ["Finance Check-In", "Review your last 5 transactions and label them: need / nice / nope."],
+          ["Future Self Setup", "Buy/prepare 1 thing that makes tomorrow easier (snack, planner, refill, etc.)."],
+        ],
+        outdoors: [
+          ["Walk & Plan", "Walk 10 minutes and voice-note your top 3 priorities + the next action for each."],
+          ["Reset with Sunlight", "Get 5 minutes of daylight. While walking, list 5 things you’re handling well."],
+          ["Brain Dump Bench", "Sit and brain-dump everything on your mind. Then star only the top 3."],
+        ],
+        anywhere: [
+          ["2-Minute Rule", "Do one task that takes <2 minutes right now (email, refill water, put away clothes)."],
+          ["No-Scroll Focus", "Turn on Do Not Disturb for your chosen minutes. Do one thing start-to-finish."],
+          ["Tiny Organization", "Organize one micro-area: your bag pocket, desktop folder, or camera roll."],
+        ]
+      },
 
-  social: {
-    home: [
-      ["Host Energy", "Plan a tiny hang: text 2 people and suggest 2 times. Keep it casual."],
-      ["Compliment Challenge", "Send 3 genuine compliments (specific, not generic)."],
-      ["Playlist Share", "Make a 5-song mini playlist and share it with someone who’d like it."],
-    ],
-    campus: [
-      ["New Friend Move", "Ask one person a real question: ‘What’s been the highlight of your week?’"],
-      ["Study Buddy Ping", "Invite someone to a 30-minute study session. Bring one snack."],
-      ["Kindness Loop", "Hold a door, smile, and say hi to 3 people. Social momentum counts."],
-    ],
-    city: [
-      ["Local Gem", "Find a new café/store and bring someone OR tell a friend about it with a pic."],
-      ["Small Talk Skill", "Ask a barista/cashier one friendly question (and genuinely listen)."],
-      ["Public Compliment", "Compliment someone’s style. Keep it simple: ‘Your outfit is so good.’"],
-    ],
-    outdoors: [
-      ["Walk With Someone", "Call a friend while walking for 10 minutes. Ask how they’re really doing."],
-      ["Photo for a Stranger", "Offer to take a photo for a couple/group. It’s wholesome social XP."],
-      ["Gratitude Text", "Text one person and say what you appreciate about them (specific)."],
-    ],
-    anywhere: [
-      ["Voice Note", "Send a 20-second voice note to someone you love. Warm + human."],
-      ["Reach Out", "Message someone you haven’t talked to in a month. Simple: ‘Hey, thinking of you.’"],
-      ["Reply With Care", "Respond thoughtfully to one message you’ve been procrastinating."],
-    ]
-  },
+      social: {
+        home: [
+          ["Host Energy", "Plan a tiny hang: text 2 people and suggest 2 times. Keep it casual."],
+          ["Compliment Challenge", "Send 3 genuine compliments (specific, not generic)."],
+          ["Playlist Share", "Make a 5-song mini playlist and share it with someone who’d like it."],
+        ],
+        campus: [
+          ["New Friend Move", "Ask one person a real question: ‘What’s been the highlight of your week?’"],
+          ["Study Buddy Ping", "Invite someone to a 30-minute study session. Bring one snack."],
+          ["Kindness Loop", "Hold a door, smile, and say hi to 3 people. Social momentum counts."],
+        ],
+        city: [
+          ["Local Gem", "Find a new café/store and bring someone OR tell a friend about it with a pic."],
+          ["Small Talk Skill", "Ask a barista/cashier one friendly question (and genuinely listen)."],
+          ["Public Compliment", "Compliment someone’s style. Keep it simple: ‘Your outfit is so good.’"],
+        ],
+        outdoors: [
+          ["Walk With Someone", "Call a friend while walking for 10 minutes. Ask how they’re really doing."],
+          ["Photo for a Stranger", "Offer to take a photo for a couple/group. It’s wholesome social XP."],
+          ["Gratitude Text", "Text one person and say what you appreciate about them (specific)."],
+        ],
+        anywhere: [
+          ["Voice Note", "Send a 20-second voice note to someone you love. Warm + human."],
+          ["Reach Out", "Message someone you haven’t talked to in a month. Simple: ‘Hey, thinking of you.’"],
+          ["Reply With Care", "Respond thoughtfully to one message you’ve been procrastinating."],
+        ]
+      },
 
-  adventurous: {
-    home: [
-      ["Mystery Recipe", "Pick a random ingredient you have and build a snack around it. Judge like a food critic."],
-      ["DIY Fashion Challenge", "Style one outfit using 1 ‘statement’ item you never wear. Take a mirror pic."],
-      ["Random Skill", "Learn one micro-skill for 10 minutes (knot, origami, shortcut, dance move)."],
-    ],
-    campus: [
-      ["New Route", "Walk to class using a different path. Find one building/spot you’ve never noticed."],
-      ["Bold Question", "Ask in class or to a TA one question you’ve been holding back."],
-      ["Campus Scavenger", "Find: a cool poster, a hidden couch, and a view. Snap pics."],
-    ],
-    city: [
-      ["3 Stops Challenge", "Do a 3-stop mini adventure: one errand, one treat, one ‘new place’."],
-      ["Thrift Micro-Hunt", "Find one item that screams ‘old money / classic’ for under your budget."],
-      ["Photo Mission", "Capture 5 ‘urban textures’ (brick, neon, shadow, chrome, reflection)."],
-    ],
-    outdoors: [
-      ["Mini Trail", "Go somewhere green. Walk until you find a spot you want to sit for 2 minutes."],
-      ["Sky Check", "Identify 3 cloud types (or just describe them like poetry)."],
-      ["Cold Exposure Lite", "Wash your hands in cold water for 30 seconds and breathe calm through it."],
-    ],
-    anywhere: [
-      ["Yes Day Moment", "Say yes to one reasonable spontaneous thing today."],
-      ["Random Generator", "Close your eyes, scroll a playlist, stop randomly. Live that song’s vibe for 3 minutes."],
-      ["Micro-Dare", "Do one tiny brave thing: ask, try, submit, apply, introduce yourself."],
-    ]
-  },
+      adventurous: {
+        home: [
+          ["Mystery Recipe", "Pick a random ingredient you have and build a snack around it. Judge like a food critic."],
+          ["DIY Fashion Challenge", "Style one outfit using 1 ‘statement’ item you never wear. Take a mirror pic."],
+          ["Random Skill", "Learn one micro-skill for 10 minutes (knot, origami, shortcut, dance move)."],
+        ],
+        campus: [
+          ["New Route", "Walk to class using a different path. Find one building/spot you’ve never noticed."],
+          ["Bold Question", "Ask in class or to a TA one question you’ve been holding back."],
+          ["Campus Scavenger", "Find: a cool poster, a hidden couch, and a view. Snap pics."],
+        ],
+        city: [
+          ["3 Stops Challenge", "Do a 3-stop mini adventure: one errand, one treat, one ‘new place’."],
+          ["Thrift Micro-Hunt", "Find one item that screams ‘old money / classic’ for under your budget."],
+          ["Photo Mission", "Capture 5 ‘urban textures’ (brick, neon, shadow, chrome, reflection)."],
+        ],
+        outdoors: [
+          ["Mini Trail", "Go somewhere green. Walk until you find a spot you want to sit for 2 minutes."],
+          ["Sky Check", "Identify 3 cloud types (or just describe them like poetry)."],
+          ["Cold Exposure Lite", "Wash your hands in cold water for 30 seconds and breathe calm through it."],
+        ],
+        anywhere: [
+          ["Yes Day Moment", "Say yes to one reasonable spontaneous thing today."],
+          ["Random Generator", "Close your eyes, scroll a playlist, stop randomly. Live that song’s vibe for 3 minutes."],
+          ["Micro-Dare", "Do one tiny brave thing: ask, try, submit, apply, introduce yourself."],
+        ]
+      },
 
-  reset: {
-    home: [
-      ["Room Reset", "Set your minutes. Put away 15 items. Make your bed last."],
-      ["Phone Detox", "Delete 10 screenshots, 10 blurry photos, and 10 apps you don’t use."],
-      ["Hydration + Stretch", "Drink water, then stretch your hips/neck/shoulders for 4 minutes."],
-    ],
-    campus: [
-      ["Breathing Staircase", "Walk one flight slowly. Inhale up, exhale down. Repeat twice."],
-      ["Unclench Break", "Find a bench. Drop shoulders. Unfurrow brow. 2 minutes of nothing."],
-      ["Reset Snack", "Eat something real (protein + carb). Then do one small task."],
-    ],
-    city: [
-      ["Errand Calm", "Do the easiest errand you’ve been avoiding. Stop immediately after. You win."],
-      ["Senses Reset", "Notice 5 things you see, 4 feel, 3 hear, 2 smell, 1 taste."],
-      ["Sun + Music", "Stand outside for 3 minutes with one song. Let your nervous system catch up."],
-    ],
-    outdoors: [
-      ["Grounding Walk", "Walk and match your breath to steps: inhale 3, exhale 4."],
-      ["Sit + Stare", "Look at something far away for 2 minutes to relax your eyes."],
-      ["Nature Gratitude", "Name 10 things in nature that just… keep going. Let that soothe you."],
-    ],
-    anywhere: [
-      ["Mini Journal", "Write: ‘Right now I feel…’ then ‘What I need is…’ then ‘Next I will…’"],
-      ["Water & Wash", "Wash your face/hands slowly like it’s a spa ritual."],
-      ["One Boundary", "Say no to one small thing that drains you today."],
-    ]
-  },
+      reset: {
+        home: [
+          ["Room Reset", "Set your minutes. Put away 15 items. Make your bed last."],
+          ["Phone Detox", "Delete 10 screenshots, 10 blurry photos, and 10 apps you don’t use."],
+          ["Hydration + Stretch", "Drink water, then stretch your hips/neck/shoulders for 4 minutes."],
+        ],
+        campus: [
+          ["Breathing Staircase", "Walk one flight slowly. Inhale up, exhale down. Repeat twice."],
+          ["Unclench Break", "Find a bench. Drop shoulders. Unfurrow brow. 2 minutes of nothing."],
+          ["Reset Snack", "Eat something real (protein + carb). Then do one small task."],
+        ],
+        city: [
+          ["Errand Calm", "Do the easiest errand you’ve been avoiding. Stop immediately after. You win."],
+          ["Senses Reset", "Notice 5 things you see, 4 feel, 3 hear, 2 smell, 1 taste."],
+          ["Sun + Music", "Stand outside for 3 minutes with one song. Let your nervous system catch up."],
+        ],
+        outdoors: [
+          ["Grounding Walk", "Walk and match your breath to steps: inhale 3, exhale 4."],
+          ["Sit + Stare", "Look at something far away for 2 minutes to relax your eyes."],
+          ["Nature Gratitude", "Name 10 things in nature that just… keep going. Let that soothe you."],
+        ],
+        anywhere: [
+          ["Mini Journal", "Write: ‘Right now I feel…’ then ‘What I need is…’ then ‘Next I will…’"],
+          ["Water & Wash", "Wash your face/hands slowly like it’s a spa ritual."],
+          ["One Boundary", "Say no to one small thing that drains you today."],
+        ]
+      },
 
-  romantic: {
-    home: [
-      ["Main Character Night", "Dim lights, play a slow song, and make your space feel like a boutique hotel."],
-      ["Self-Date Menu", "Pick: (movie OR book) + (snack) + (blanket). Commit fully for your minutes."],
-      ["Perfume + Poetry", "Put on fragrance (or lotion) and write 4 lines of dramatic poetry about your life."],
-    ],
-    campus: [
-      ["Soft Walk", "Take a slow walk and admire architecture like you’re in Paris (mentally)."],
-      ["Love Letter Draft", "Write a tiny appreciation note to someone (or yourself). Save it."],
-      ["Romance in Study", "Light a virtual candle (lol) and do 10 focused minutes like it’s aesthetic study."],
-    ],
-    city: [
-      ["Café Moment", "Sit somewhere cute. Order something warm. Put your phone away for 5 minutes."],
-      ["Bouquet Energy", "Buy or photograph a flower. Give it to someone or keep it like a movie prop."],
-      ["Dress Up Errand", "Wear one ‘nice’ thing just to run an errand. Romanticize the mundane."],
-    ],
-    outdoors: [
-      ["Golden Hour Stroll", "Walk during golden hour if possible. Take 3 photos that feel cinematic."],
-      ["Sky Romance", "Find the moon (or a star). Make a wish like you’re 8 again."],
-      ["Scarf + Walk", "Bundle up. Slow walk. Pretend you’re in a romance montage."],
-    ],
-    anywhere: [
-      ["Flirt With Life", "Choose a ‘signature’ posture (shoulders back). Walk like you have a secret."],
-      ["Compliment Yourself", "Say one nice thing about yourself out loud. Yes, really."],
-      ["Aesthetic Notes", "Write your to-do list in a prettier way. Add one heart. It counts."],
-    ]
-  },
+      romantic: {
+        home: [
+          ["Main Character Night", "Dim lights, play a slow song, and make your space feel like a boutique hotel."],
+          ["Self-Date Menu", "Pick: (movie OR book) + (snack) + (blanket). Commit fully for your minutes."],
+          ["Perfume + Poetry", "Put on fragrance (or lotion) and write 4 lines of dramatic poetry about your life."],
+        ],
+        campus: [
+          ["Soft Walk", "Take a slow walk and admire architecture like you’re in Paris (mentally)."],
+          ["Love Letter Draft", "Write a tiny appreciation note to someone (or yourself). Save it."],
+          ["Romance in Study", "Light a virtual candle (lol) and do 10 focused minutes like it’s aesthetic study."],
+        ],
+        city: [
+          ["Café Moment", "Sit somewhere cute. Order something warm. Put your phone away for 5 minutes."],
+          ["Bouquet Energy", "Buy or photograph a flower. Give it to someone or keep it like a movie prop."],
+          ["Dress Up Errand", "Wear one ‘nice’ thing just to run an errand. Romanticize the mundane."],
+        ],
+        outdoors: [
+          ["Golden Hour Stroll", "Walk during golden hour if possible. Take 3 photos that feel cinematic."],
+          ["Sky Romance", "Find the moon (or a star). Make a wish like you’re 8 again."],
+          ["Scarf + Walk", "Bundle up. Slow walk. Pretend you’re in a romance montage."],
+        ],
+        anywhere: [
+          ["Flirt With Life", "Choose a ‘signature’ posture (shoulders back). Walk like you have a secret."],
+          ["Compliment Yourself", "Say one nice thing about yourself out loud. Yes, really."],
+          ["Aesthetic Notes", "Write your to-do list in a prettier way. Add one heart. It counts."],
+        ]
+      },
 
-  creative: {
-    home: [
-      ["Moodboard Sprint", "Make a 9-image moodboard (screenshots) for your dream aesthetic or project."],
-      ["Tiny Design", "Design a fake product label in your notes app. Name + tagline + 3 features."],
-      ["One-Page Story", "Write a 6-sentence story: setting, character, want, obstacle, twist, ending."],
-    ],
-    campus: [
-      ["Poster Remix", "Photograph a cool poster/sign and redesign it mentally: new colors, new fonts."],
-      ["Idea Walk", "Walk 8 minutes and brainstorm 10 content ideas. No judging."],
-      ["Sketch Break", "Sketch literally anything for 5 minutes. Even doodles count."],
-    ],
-    city: [
-      ["Street Color Hunt", "Find 5 colors in the wild. Write them down as a palette."],
-      ["Photo Series", "Take 6 photos of ‘reflections’ (windows, mirrors, puddles)."],
-      ["Brand Audit", "Pick a store and analyze: target customer, vibe, pricing cues, packaging."],
-    ],
-    outdoors: [
-      ["Haiku", "Write a haiku about something you see right now."],
-      ["Texture Rubbings", "If you have paper, do 2 texture rubbings. If not, just photograph textures."],
-      ["Cloud Character", "Pick a cloud. Decide what personality it has. Describe it in 3 traits."],
-    ],
-    anywhere: [
-      ["10 Ideas", "Write 10 ideas for anything (products, videos, dates). Quantity > quality."],
-      ["Voice Note Poem", "Record a 30-second spoken poem. No one has to hear it."],
-      ["Reframe", "Take one annoying thing and write 3 ways it could be a movie scene."],
-    ]
-  }
-};
+      creative: {
+        home: [
+          ["Moodboard Sprint", "Make a 9-image moodboard (screenshots) for your dream aesthetic or project."],
+          ["Tiny Design", "Design a fake product label in your notes app. Name + tagline + 3 features."],
+          ["One-Page Story", "Write a 6-sentence story: setting, character, want, obstacle, twist, ending."],
+        ],
+        campus: [
+          ["Poster Remix", "Photograph a cool poster/sign and redesign it mentally: new colors, new fonts."],
+          ["Idea Walk", "Walk 8 minutes and brainstorm 10 content ideas. No judging."],
+          ["Sketch Break", "Sketch literally anything for 5 minutes. Even doodles count."],
+        ],
+        city: [
+          ["Street Color Hunt", "Find 5 colors in the wild. Write them down as a palette."],
+          ["Photo Series", "Take 6 photos of ‘reflections’ (windows, mirrors, puddles)."],
+          ["Brand Audit", "Pick a store and analyze: target customer, vibe, pricing cues, packaging."],
+        ],
+        outdoors: [
+          ["Haiku", "Write a haiku about something you see right now."],
+          ["Texture Rubbings", "If you have paper, do 2 texture rubbings. If not, just photograph textures."],
+          ["Cloud Character", "Pick a cloud. Decide what personality it has. Describe it in 3 traits."],
+        ],
+        anywhere: [
+          ["10 Ideas", "Write 10 ideas for anything (products, videos, dates). Quantity > quality."],
+          ["Voice Note Poem", "Record a 30-second spoken poem. No one has to hear it."],
+          ["Reframe", "Take one annoying thing and write 3 ways it could be a movie scene."],
+        ]
+      }
+    };
 
-// fallback if a mood/location combo is missing
-function listFor(mood, loc){
-  return (QUESTS[mood] && QUESTS[mood][loc]) ? QUESTS[mood][loc]
-       : (QUESTS[mood] && QUESTS[mood]["anywhere"]) ? QUESTS[mood]["anywhere"]
-       : QUESTS["reset"]["anywhere"];
-}
+    // fallback if a mood/location combo is missing
+    function listFor(mood, loc) {
+      return (QUESTS[mood] && QUESTS[mood][loc]) ? QUESTS[mood][loc]
+        : (QUESTS[mood] && QUESTS[mood]["anywhere"]) ? QUESTS[mood]["anywhere"]
+          : QUESTS["reset"]["anywhere"];
+    }
 
-// current quest state
-let current = null;
-let timer = { running:false, start:0, end:0, remaining:0, raf:0, paused:false };
+    // current quest state
+    let current = null;
+    let timer = { running: false, start: 0, end: 0, remaining: 0, raf: 0, paused: false };
 
-function formatMMSS(ms){
-  const total = Math.max(0, Math.floor(ms/1000));
-  const m = String(Math.floor(total/60)).padStart(2,"0");
-  const s = String(total%60).padStart(2,"0");
-  return `${m}:${s}`;
-}
+    function formatMMSS(ms) {
+      const total = Math.max(0, Math.floor(ms / 1000));
+      const m = String(Math.floor(total / 60)).padStart(2, "0");
+      const s = String(total % 60).padStart(2, "0");
+      return `${m}:${s}`;
+    }
 
-// history
-function loadHistory(){
-  try{
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  } catch { return []; }
-}
-function saveHistory(arr){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-}
+    // history
+    function loadHistory() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch { return []; }
+    }
+    function saveHistory(arr) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    }
 
-function computeStreak(history){
-  // count consecutive days with at least one completion
-  const days = Array.from(new Set(history.map(h => h.date))).sort(); // ISO sort
-  if(days.length === 0) return 0;
+    function computeStreak(history) {
+      // count consecutive days with at least one completion
+      const days = Array.from(new Set(history.map(h => h.date))).sort(); // ISO sort
+      if (days.length === 0) return 0;
 
-  let streak = 1;
-  for(let i = days.length-1; i>0; i--){
-    const d1 = new Date(days[i]);
-    const d0 = new Date(days[i-1]);
-    const diff = (d1 - d0) / (1000*60*60*24);
-    if(diff === 1) streak++;
-    else if(diff > 1) break;
-  }
-  // if latest day isn't today, streak resets to 0 (optional logic)
-  const last = days[days.length-1];
-  if(last !== todayISO()) return 0;
-  return streak;
-}
+      let streak = 1;
+      for (let i = days.length - 1; i > 0; i--) {
+        const d1 = new Date(days[i]);
+        const d0 = new Date(days[i - 1]);
+        const diff = (d1 - d0) / (1000 * 60 * 60 * 24);
+        if (diff === 1) streak++;
+        else if (diff > 1) break;
+      }
+      // if latest day isn't today, streak resets to 0 (optional logic)
+      const last = days[days.length - 1];
+      if (last !== todayISO()) return 0;
+      return streak;
+    }
 
-function renderHistory(){
-  const history = loadHistory().slice().reverse();
-  els.histList.innerHTML = "";
-  if(history.length === 0){
-    els.emptyMsg.style.display = "block";
-  } else {
-    els.emptyMsg.style.display = "none";
-    for(const h of history){
-      const div = document.createElement("div");
-      div.className = "item";
-      div.innerHTML = `
+    function renderHistory() {
+      const history = loadHistory().slice().reverse();
+      els.histList.innerHTML = "";
+      if (history.length === 0) {
+        els.emptyMsg.style.display = "block";
+      } else {
+        els.emptyMsg.style.display = "none";
+        for (const h of history) {
+          const div = document.createElement("div");
+          div.className = "item";
+          div.innerHTML = `
         <div class="itemtop">
           <span>${h.date}</span>
           <span>${h.mood} • ${h.location} • d${h.difficulty}</span>
@@ -766,286 +888,287 @@ function renderHistory(){
         <p class="itemtitle">${escapeHTML(h.title)}</p>
         <div class="tiny" style="margin-top:6px;color:var(--muted);">${escapeHTML(h.desc)}</div>
       `;
-      els.histList.appendChild(div);
+          els.histList.appendChild(div);
+        }
+      }
+      const streak = computeStreak(loadHistory());
+      els.streakChip.textContent = `STREAK: ${streak}`;
+      els.doneChip.textContent = `DONE: ${loadHistory().length}`;
     }
-  }
-  const streak = computeStreak(loadHistory());
-  els.streakChip.textContent = `STREAK: ${streak}`;
-  els.doneChip.textContent = `DONE: ${loadHistory().length}`;
-}
 
-function escapeHTML(s){
-  return String(s).replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[c]));
-}
+    function escapeHTML(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[c]));
+    }
 
-function personalize(text, name){
-  if(!name.trim()) return text;
-  // gentle sprinkle: append a tailored line sometimes
-  const addOns = [
-    `Bonus: weave in "${name.trim()}" somehow — make it your main-character detail.`,
-    `Make it personal: reference "${name.trim()}" while you do it.`,
-    `Tiny twist: do it in a way that matches "${name.trim()}".`
-  ];
-  return text + " " + addOns[Math.floor(Math.random()*addOns.length)];
-}
+    function personalize(text, name) {
+      if (!name.trim()) return text;
+      // gentle sprinkle: append a tailored line sometimes
+      const addOns = [
+        `Bonus: weave in "${name.trim()}" somehow — make it your main-character detail.`,
+        `Make it personal: reference "${name.trim()}" while you do it.`,
+        `Tiny twist: do it in a way that matches "${name.trim()}".`
+      ];
+      return text + " " + addOns[Math.floor(Math.random() * addOns.length)];
+    }
 
-function generateQuest(variation = 0){
-  const mood = els.mood.value;
-  const location = els.location.value;
-  const mins = clamp(parseInt(els.minutes.value || "12", 10), 3, 90);
-  const diff = parseInt(els.difficulty.value, 10);
-  const personal = els.name.value;
+    function generateQuest(variation = 0) {
+      const mood = els.mood.value;
+      const location = els.location.value;
+      const mins = clamp(parseInt(els.minutes.value || "12", 10), 3, 90);
+      const diff = parseInt(els.difficulty.value, 10);
+      const personal = els.name.value;
 
-  // seed ties to inputs + variation so reroll feels deterministic
-  const seedStr = `${todayISO()}|${mood}|${location}|${mins}|${diff}|${personal}|${variation}`;
-  const seed = hashStringToSeed(seedStr);
-  const rand = mulberry32(seed);
+      // seed ties to inputs + variation so reroll feels deterministic
+      const seedStr = `${todayISO()}|${mood}|${location}|${mins}|${diff}|${personal}|${variation}`;
+      const seed = hashStringToSeed(seedStr);
+      const rand = mulberry32(seed);
 
-  const pool = listFor(mood, location);
-  const idx = Math.floor(rand() * pool.length);
+      const pool = listFor(mood, location);
+      const idx = Math.floor(rand() * pool.length);
 
-  const [title, descBase] = pool[idx];
-  const spice = diff >= 7
-    ? "Hard mode: add one extra constraint (no phone, or do it in half the time, or do it in public)."
-    : diff <= 3
-      ? "Easy mode: keep it gentle. Done is done."
-      : "Medium mode: push a little past comfy.";
+      const [title, descBase] = pool[idx];
+      const spice = diff >= 7
+        ? "Hard mode: add one extra constraint (no phone, or do it in half the time, or do it in public)."
+        : diff <= 3
+          ? "Easy mode: keep it gentle. Done is done."
+          : "Medium mode: push a little past comfy.";
 
-  const desc = personalize(`${descBase} ${spice}`, personal);
+      const desc = personalize(`${descBase} ${spice}`, personal);
 
-  current = {
-    id: `${seed}-${idx}`,
-    seed,
-    title,
-    desc,
-    mood,
-    location,
-    minutes: mins,
-    difficulty: diff
-  };
+      current = {
+        id: `${seed}-${idx}`,
+        seed,
+        title,
+        desc,
+        mood,
+        location,
+        minutes: mins,
+        difficulty: diff
+      };
 
-  els.seedLabel.textContent = `seed: ${seed.toString(16).slice(0,8)}`;
-  els.questTitle.textContent = title;
-  els.questDesc.textContent = desc;
-  els.questMood.textContent = `mood: ${mood}`;
-  els.questLoc.textContent = `location: ${location}`;
-  els.questDiff.textContent = `difficulty: ${diff}/10`;
-  els.questTime.textContent = `time: ${mins} min`;
-  els.questBox.style.display = "block";
+      els.seedLabel.textContent = `seed: ${seed.toString(16).slice(0, 8)}`;
+      els.questTitle.textContent = title;
+      els.questDesc.textContent = desc;
+      els.questMood.textContent = `mood: ${mood}`;
+      els.questLoc.textContent = `location: ${location}`;
+      els.questDiff.textContent = `difficulty: ${diff}/10`;
+      els.questTime.textContent = `time: ${mins} min`;
+      els.questBox.style.display = "block";
 
-  els.rerollBtn.disabled = false;
-  els.startBtn.disabled = false;
-  els.abandonBtn.disabled = false;
+      els.rerollBtn.disabled = false;
+      els.startBtn.disabled = false;
+      els.abandonBtn.disabled = false;
 
-  stopTimerUI();
-}
+      stopTimerUI();
+    }
 
-let variationCount = 0;
+    let variationCount = 0;
 
-els.generateBtn.addEventListener("click", () => {
-  variationCount = 0;
-  generateQuest(variationCount);
-});
-
-els.rerollBtn.addEventListener("click", () => {
-  variationCount++;
-  generateQuest(variationCount);
-});
-
-els.abandonBtn.addEventListener("click", () => {
-  current = null;
-  variationCount = 0;
-  stopTimerUI();
-  els.questBox.style.display = "none";
-  els.rerollBtn.disabled = true;
-  els.startBtn.disabled = true;
-  els.abandonBtn.disabled = true;
-});
-
-els.clearBtn.addEventListener("click", () => {
-  localStorage.removeItem(STORAGE_KEY);
-  renderHistory();
-});
-
-function startTimer(){
-  if(!current) return;
-  const ms = current.minutes * 60 * 1000;
-  timer.running = true;
-  timer.paused = false;
-  timer.start = performance.now();
-  timer.end = timer.start + ms;
-  timer.remaining = ms;
-
-  els.timerBox.style.display = "flex";
-  els.progressBox.style.display = "block";
-  els.pauseBtn.textContent = "Pause";
-  tick();
-}
-
-function tick(){
-  if(!timer.running) return;
-
-  const now = performance.now();
-  const remaining = timer.end - now;
-  timer.remaining = remaining;
-  els.timeLeft.textContent = formatMMSS(remaining);
-
-  const total = current.minutes * 60 * 1000;
-  const done = clamp(1 - (remaining/total), 0, 1);
-  els.bar.style.width = `${Math.round(done*100)}%`;
-
-  if(remaining <= 0){
-    timer.running = false;
-    els.timeLeft.textContent = "00:00";
-    els.bar.style.width = "100%";
-    // auto celebrate but not auto-complete (user clicks finish)
-    pulseConfetti();
-    return;
-  }
-  timer.raf = requestAnimationFrame(tick);
-}
-
-function stopTimerUI(){
-  timer.running = false;
-  timer.paused = false;
-  if(timer.raf) cancelAnimationFrame(timer.raf);
-  els.timerBox.style.display = "none";
-  els.progressBox.style.display = "none";
-  els.bar.style.width = "0%";
-  els.timeLeft.textContent = "00:00";
-}
-
-els.startBtn.addEventListener("click", () => {
-  startTimer();
-});
-
-els.pauseBtn.addEventListener("click", () => {
-  if(!timer.running && !timer.paused) return;
-
-  if(timer.paused){
-    // resume
-    timer.paused = false;
-    timer.running = true;
-    timer.start = performance.now();
-    timer.end = timer.start + timer.remaining;
-    els.pauseBtn.textContent = "Pause";
-    tick();
-  } else {
-    // pause
-    timer.paused = true;
-    timer.running = false;
-    if(timer.raf) cancelAnimationFrame(timer.raf);
-    els.pauseBtn.textContent = "Resume";
-  }
-});
-
-els.finishBtn.addEventListener("click", () => {
-  if(!current) return;
-
-  const history = loadHistory();
-  history.push({
-    date: todayISO(),
-    title: current.title,
-    desc: current.desc,
-    mood: current.mood,
-    location: current.location,
-    minutes: current.minutes,
-    difficulty: current.difficulty
-  });
-  saveHistory(history);
-  renderHistory();
-
-  megaConfetti();
-  // lock current quest, but keep it visible
-  els.startBtn.disabled = true;
-  els.rerollBtn.disabled = true;
-  els.abandonBtn.disabled = true;
-  stopTimerUI();
-});
-
-renderHistory();
-
-/* ---------------------------
-   Confetti (tiny custom)
-----------------------------*/
-const canvas = document.getElementById("confetti");
-const ctx = canvas.getContext("2d");
-let confettiPieces = [];
-let confettiRAF = 0;
-
-function resizeCanvas(){
-  canvas.width = window.innerWidth * devicePixelRatio;
-  canvas.height = window.innerHeight * devicePixelRatio;
-  canvas.style.width = window.innerWidth + "px";
-  canvas.style.height = window.innerHeight + "px";
-  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
-}
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
-
-function spawnConfetti(count, power=1){
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-  for(let i=0;i<count;i++){
-    confettiPieces.push({
-      x: Math.random()*w,
-      y: -10 - Math.random()*h*0.2,
-      r: 3 + Math.random()*5,
-      vx: (-1 + Math.random()*2) * (2.2*power),
-      vy: (2.5 + Math.random()*4) * (2.4*power),
-      rot: Math.random()*Math.PI,
-      vr: (-1 + Math.random()*2) * 0.12,
-      life: 1.0,
-      fade: 0.006 + Math.random()*0.01
+    els.generateBtn.addEventListener("click", () => {
+      variationCount = 0;
+      generateQuest(variationCount);
     });
-  }
-}
 
-function drawConfetti(){
-  ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
-  const w = window.innerWidth;
-  const h = window.innerHeight;
+    els.rerollBtn.addEventListener("click", () => {
+      variationCount++;
+      generateQuest(variationCount);
+    });
 
-  confettiPieces = confettiPieces.filter(p => p.life > 0 && p.y < h+30);
+    els.abandonBtn.addEventListener("click", () => {
+      current = null;
+      variationCount = 0;
+      stopTimerUI();
+      els.questBox.style.display = "none";
+      els.rerollBtn.disabled = true;
+      els.startBtn.disabled = true;
+      els.abandonBtn.disabled = true;
+    });
 
-  for(const p of confettiPieces){
-    p.x += p.vx;
-    p.y += p.vy;
-    p.rot += p.vr;
-    p.life -= p.fade;
+    els.clearBtn.addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEY);
+      renderHistory();
+    });
 
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rot);
-    // no fixed colors: use hue shift
-    const hue = (p.x / w) * 360;
-    ctx.fillStyle = `hsla(${hue}, 90%, 60%, ${Math.max(0,p.life)})`;
-    ctx.fillRect(-p.r, -p.r/2, p.r*2, p.r);
-    ctx.restore();
-  }
+    function startTimer() {
+      if (!current) return;
+      const ms = current.minutes * 60 * 1000;
+      timer.running = true;
+      timer.paused = false;
+      timer.start = performance.now();
+      timer.end = timer.start + ms;
+      timer.remaining = ms;
 
-  if(confettiPieces.length > 0){
-    confettiRAF = requestAnimationFrame(drawConfetti);
-  } else {
-    cancelAnimationFrame(confettiRAF);
-  }
-}
+      els.timerBox.style.display = "flex";
+      els.progressBox.style.display = "block";
+      els.pauseBtn.textContent = "Pause";
+      tick();
+    }
 
-function pulseConfetti(){
-  spawnConfetti(40, 0.7);
-  if(!confettiRAF) drawConfetti();
-}
-function megaConfetti(){
-  spawnConfetti(140, 1.1);
-  if(!confettiRAF) drawConfetti();
-}
+    function tick() {
+      if (!timer.running) return;
 
-/* Small subtle celebration when timer hits 0 */
-function pulseOnZeroCheck(){
-  // unused hook; handled in tick()
-}
-</script>
+      const now = performance.now();
+      const remaining = timer.end - now;
+      timer.remaining = remaining;
+      els.timeLeft.textContent = formatMMSS(remaining);
+
+      const total = current.minutes * 60 * 1000;
+      const done = clamp(1 - (remaining / total), 0, 1);
+      els.bar.style.width = `${Math.round(done * 100)}%`;
+
+      if (remaining <= 0) {
+        timer.running = false;
+        els.timeLeft.textContent = "00:00";
+        els.bar.style.width = "100%";
+        // auto celebrate but not auto-complete (user clicks finish)
+        pulseConfetti();
+        return;
+      }
+      timer.raf = requestAnimationFrame(tick);
+    }
+
+    function stopTimerUI() {
+      timer.running = false;
+      timer.paused = false;
+      if (timer.raf) cancelAnimationFrame(timer.raf);
+      els.timerBox.style.display = "none";
+      els.progressBox.style.display = "none";
+      els.bar.style.width = "0%";
+      els.timeLeft.textContent = "00:00";
+    }
+
+    els.startBtn.addEventListener("click", () => {
+      startTimer();
+    });
+
+    els.pauseBtn.addEventListener("click", () => {
+      if (!timer.running && !timer.paused) return;
+
+      if (timer.paused) {
+        // resume
+        timer.paused = false;
+        timer.running = true;
+        timer.start = performance.now();
+        timer.end = timer.start + timer.remaining;
+        els.pauseBtn.textContent = "Pause";
+        tick();
+      } else {
+        // pause
+        timer.paused = true;
+        timer.running = false;
+        if (timer.raf) cancelAnimationFrame(timer.raf);
+        els.pauseBtn.textContent = "Resume";
+      }
+    });
+
+    els.finishBtn.addEventListener("click", () => {
+      if (!current) return;
+
+      const history = loadHistory();
+      history.push({
+        date: todayISO(),
+        title: current.title,
+        desc: current.desc,
+        mood: current.mood,
+        location: current.location,
+        minutes: current.minutes,
+        difficulty: current.difficulty
+      });
+      saveHistory(history);
+      renderHistory();
+
+      megaConfetti();
+      // lock current quest, but keep it visible
+      els.startBtn.disabled = true;
+      els.rerollBtn.disabled = true;
+      els.abandonBtn.disabled = true;
+      stopTimerUI();
+    });
+
+    renderHistory();
+
+    /* ---------------------------
+       Confetti (tiny custom)
+    ----------------------------*/
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    let confettiPieces = [];
+    let confettiRAF = 0;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = window.innerHeight * devicePixelRatio;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    function spawnConfetti(count, power = 1) {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      for (let i = 0; i < count; i++) {
+        confettiPieces.push({
+          x: Math.random() * w,
+          y: -10 - Math.random() * h * 0.2,
+          r: 3 + Math.random() * 5,
+          vx: (-1 + Math.random() * 2) * (2.2 * power),
+          vy: (2.5 + Math.random() * 4) * (2.4 * power),
+          rot: Math.random() * Math.PI,
+          vr: (-1 + Math.random() * 2) * 0.12,
+          life: 1.0,
+          fade: 0.006 + Math.random() * 0.01
+        });
+      }
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      confettiPieces = confettiPieces.filter(p => p.life > 0 && p.y < h + 30);
+
+      for (const p of confettiPieces) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+        p.life -= p.fade;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        // no fixed colors: use hue shift
+        const hue = (p.x / w) * 360;
+        ctx.fillStyle = `hsla(${hue}, 90%, 60%, ${Math.max(0, p.life)})`;
+        ctx.fillRect(-p.r, -p.r / 2, p.r * 2, p.r);
+        ctx.restore();
+      }
+
+      if (confettiPieces.length > 0) {
+        confettiRAF = requestAnimationFrame(drawConfetti);
+      } else {
+        cancelAnimationFrame(confettiRAF);
+      }
+    }
+
+    function pulseConfetti() {
+      spawnConfetti(40, 0.7);
+      if (!confettiRAF) drawConfetti();
+    }
+    function megaConfetti() {
+      spawnConfetti(140, 1.1);
+      if (!confettiRAF) drawConfetti();
+    }
+
+    /* Small subtle celebration when timer hits 0 */
+    function pulseOnZeroCheck() {
+      // unused hook; handled in tick()
+    }
+  </script>
 </body>
+
 </html>
