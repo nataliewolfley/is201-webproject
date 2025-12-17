@@ -1,35 +1,77 @@
- body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    color: #1e1b1b;
-    background-color: rgb(251, 227, 241);
-   
- }
-li {
-    font-size: 14px;
-    font-style: italic;
-    font-weight: normal;    
+:root {
+  --main-color: #ed6b86;
+  --accent-color: #ff9671;
+  --background-color: #f9f871;
+  --text-color: #1e1b1b;
 }
-a{color: black;
-text-decoration: none;
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: #1e1b1b;
+  background-color: rgb(251, 227, 241);
+}
+
+.navbar {
+  background-color: var(--main-color);
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 14px 20px;
+  display: block;
+}
+.navbar-brand {
+  /* color: #E9E6FF; */
+    font-weight: bold;
+    font-size: 24px;
+}
+
+/* li {
+  font-size: 14px;
+  font-style: italic;
+  font-weight: normal;
+}
+a {
+  color: black;
+  text-decoration: none;
 }
 a.hover {
-    text-decoration: underline;
-    font-weight: bold;
+  text-decoration: underline;
+  font-weight: bold;
 }
 .resumelistheading {
-        font-weight:bolder;
-        font-style: normal;
+  font-weight: bolder;
+  font-style: normal;
 }
-.bold {font-weight: bold;} 
-.justify {text-align: justify;}
+.bold {
+  font-weight: bold;
+}
+.justify {
+  text-align: justify;
+} */
 
-.homebg{
-    background-image: url('../images/natalie_by_boat.jpeg');
-    /* background-position: top right; */
-    background-size: cover;       /* makes it fit the screen */
-    background-repeat: no-repeat; /* prevents tiling */
-    background-position: center;  /* keeps focus centered */
-    height: 100vh;                /* ensures it fills the viewport */
-    margin: 0; 
+.homebg {
+  background-image: url("../images/natalie_by_boat.jpeg");
+  /* background-position: top right; */
+  background-size: cover; /* makes it fit the screen */
+  background-repeat: no-repeat; /* prevents tiling */
+  background-position: center; /* keeps focus centered */
+  height: 100vh; /* ensures it fills the viewport */
+  margin: 0;
+}
+
+.about-me-main {
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff0f6;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-me-main ol li {
+  font-size: 18px;
+  font-weight: 500;
 }

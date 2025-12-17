@@ -5,95 +5,276 @@ Monday December 8th 2025
 -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Resume</title>
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../styles/styles.css" />
+  </head>
+  <body id="top">
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html">Natalie Wolfley</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="../index.html"
+                >Home</a
+              >
+              <a class="nav-link" href="../html/resume.html">Resume</a>
+              <a class="nav-link" href="../html/aboutMe.html">About Me</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container my-4">
+      <div class="container col-xxl-8 px-4 py-3">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+            <img
+              src="../images/natalie_photo_red_shirt.jpeg"
+              alt="Professional headshot of Natalie Wolfley"
+              class="rounded-circle object-fit-cover"
+              width="300"
+              height="300"
+              loading="lazy"
+            />
+          </div>
+          <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+              Natalie Wolfley
+            </h1>
+            <hr class="border-3 border-dark my-2" />
+            <p class="lead">Sales Specialist at Apple</p>
+            <p class="text-muted">Midvale, Utah</p>
+          </div>
+        </div>
+      </div>
+      <!-- Mission Statement -->
+      <section class="container my-2">
+        <div class="p-5 text-center bg-body-tertiary rounded-3">
+          <h1 class="text-body-emphasis">Mission Statement</h1>
+          <p class="lead">
+            My goal is to become a Serial Entrepreneur, leveraging my skills and
+            experiences to create innovative business solutions and make a
+            positive impact in the community.
+          </p>
+        </div>
+      </section>
+      <!-- Education -->
+      <section class="container my-1">
+        <h2 class="text-body-emphasis">Education</h2>
+        <div
+          class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative"
+        >
+          <div class="col p-4 d-flex flex-column position-static">
+            <h3 class="mb-0">Honors High School Diploma</h3>
+            <div class="mb-1 text-body-secondary">
+              Trivium Preparatory Academy
+            </div>
+            <p class="card-text mb-auto">Goodyear, Arizona | 2022</p>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+            <img
+              src="../images/trivium-prep-logo.png"
+              alt="Trivium Preparatory Academy Logo"
+              width="100"
+              height="auto"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+      <!-- Experience -->
+      <section class="container my-1">
+        <h2 class="text-body-emphasis">Experience</h2>
+        <div class="container">
+          <h4>Apple Product Specialist</h4>
+          <div class="mb-1 text-muted fst-italic">
+            Apple City Creek Center, Salt Lake City, Utah
+          </div>
+          <p class="text-body-secondary">Aug. 2024 – Present</p>
+          <ul>
+            <li>
+              Guide customers in discovering, comparing, and experiencing Apple
+              products, empowering them to make confident purchasing decisions.
+            </li>
+            <li>
+              Provide exceptional service by understanding customer needs,
+              identifying sales opportunities, presenting solutions, and
+              educating on purchase options.
+            </li>
+          </ul>
+          <hr />
+        </div>
 
-</head>
-<body>
-    <a href="../index.html" id="top">Home</a> | 
-    <a href="#">Resume</a> | 
-    <a href="AboutMe.html">About Me</a> <br><br>
-
-    <br><br>
-    <img src="../images/natalie_photo_red_shirt.jpeg" height="175" alt="Profesional Headshot of Natalie Wolfley">
-    <h1>Natalie Wolfley</h1>
-
-<p>
-     <a href="#edu">Education</a><br>
-    <a href="#exp ">Experience</a><br>
-    <a href="#ski ">Skills </a><br>
-</p>
-    Sales Specialist <br>
-    Apple <br>
-    291 E 6790 S Midvale Utah 84047<br>
-
-<p>
-    Visit my <a href="https://www.linkedin.com/in/natalie-wolfley-094898251/" target="_blank" title="Natalie Wolfley's Linked In Profile">Linked In!</a>
-</p>
-
-    <p class="justify"><span class="bold">Mission Statement:</span>  My goal is to become a Serial Entrepreneur</p>
-    <ol>
-        <li id="edu"class="resumelistheading">Education
-            <ul>
-                <li>Honors High School Diploma Trivium Preparatory Academy</li>
-            </ul>
+        <div class="container">
+          <h4>Processing and Sorting Team Member</h4>
+          <div class="mb-1 text-muted fst-italic">
+            ShipMyCards, Phoenix, Arizona
+          </div>
+          <p class="text-body-secondary">May 2024 – Aug. 2024</p>
+          <ul>
+            <li>
+              Managed product shipments, ensuring accurate documentation,
+              sorting, and organization of inventory.
+            </li>
+            <li>
+              Maintained a high level of attention to detail to uphold quality
+              control standards and ensure accuracy in inventory records
+            </li>
+          </ul>
+          <hr />
+        </div>
+        <div class="container">
+          <h4>Retail Specialist</h4>
+          <div class="mb-1 text-muted fst-italic">
+            Cracker Barrel, Goodyear, Arizona
+          </div>
+          <p class="text-body-secondary">May 2024 – Aug. 2024</p>
+          <ul>
+            <li>
+              Delivered exceptional customer service by addressing needs,
+              resolving issues, and ensuring customer satisfaction.
+            </li>
+            <li>
+              Operated cash registers and processed transactions accurately and
+              efficiently, maintaining a smooth checkout experience.
+            </li>
+            <li>
+              Monitored inventory levels and restocked shelves to ensure product
+              availability and a well-organized shopping environment.
+            </li>
+          </ul>
+          <hr />
+        </div>
+        <div class="container">
+          <h4>Team Lead & Brand Ambassador</h4>
+          <div class="mb-1 text-muted fst-italic">Aerie, Glendale, Arizona</div>
+          <p class="text-body-secondary">Sep 2020 – Aug. 2022</p>
+          <ul>
+            <li>
+              Leveraged optimized sales techniques to build strong customer
+              relationships, effectively driving product sales.
+            </li>
+            <li>
+              Ensured the store’s appearance met and exceeded brand standards by
+              maintaining a clean, organized, and visually appealing
+              environment.
+            </li>
+            <li>
+              Led shifts and trained employees, fostering a collaborative and
+              high-performing team while ensuring smooth daily operations.
+            </li>
+          </ul>
+          <hr />
+        </div>
+        <div class="container">
+          <h4>Lifeguard Swim Instructor</h4>
+          <div class="mb-1 text-muted fst-italic">
+            City of Litchfield Recreation Center, Litchfield Park, Arizona
+          </div>
+          <p class="text-body-secondary">May 2019 – Aug. 2021</p>
+          <ul>
+            <li>CPR-certified and Water Safety Instructor-certified.</li>
+            <li>
+              Monitored and ensured patron safety, providing assistance and
+              guidance to create a secure environment.
+            </li>
+            <li>
+              Taught swimming classes to individuals of all ages, covering
+              fundamental skills as well as advanced techniques to help students
+              build confidence and competence in the water.
+            </li>
+          </ul>
+          <hr />
+        </div>
+        <div class="container">
+          <h4>Hostess</h4>
+          <div class="mb-1 text-muted fst-italic">
+            Reds Bar and Grill, Litchfield Park, Arizona
+          </div>
+          <p class="text-body-secondary">May 2019 – Aug. 2021</p>
+          <ul>
+            <li>
+              Delivered exceptional customer service by providing personalized
+              attention to guests, ensuring a positive and welcoming experience.
+            </li>
+            <li>
+              Resolved challenging situations effectively through proactive
+              problem-solving and conflict resolution skills, maintaining guest
+              satisfaction.
+            </li>
+          </ul>
+          <hr />
+        </div>
+      </section>
+      <!-- Skills -->
+      <section class="container my-1">
+        <h2 class="text-body-emphasis">Skills</h2>
+        <ul>
+          <li>Fluent in Spanish (speaking, reading, and writing)</li>
+          <li>Proficient in Microsoft Office Suite (Word, Excel, PowerPoint)</li>
+          <li>Strong communication and interpersonal skills</li>
+          <li>Excellent organizational and time management abilities</li>
+          <li>Adaptable and quick learner in fast-paced environments</li>
+        </ul>
+        </section>  
+       <!-- Service -->
+      <section class="container my-1">
+        <h2 class="text-body-emphasis">Service</h2>
+        <div class="container">
+          <h4>Missionary</h4>
+          <div class="mb-1 text-muted fst-italic">
+            The Church of Jesus Christ of Latter-day Saints, Santiago, Chile
+          </div>
+          <p class="text-body-secondary">Oct. 2022 – Apr. 2024</p>
+        </div>
+        </section>  
+    </main>
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item">
+          <a href="../index.html" class="nav-link px-2 text-muted">Home</a>
         </li>
-        <li id="exp"class="resumelistheading">Experience
-            <ul>
-                <li>Apple Product Specialist Aug. 2024 – Present Apple City Creek Center, Salt Lake City, Utah</li>
-                <li>Processing and Sorting Team Member May 2024 – Present ShipMyCards Phoenix, Arizona</li>
-                <li>Retail Specialist May 2024 – Aug. 2024 Cracker Barrel Goodyear, Arizona</li>
-                <li>Team Lead & Brand Ambassador Sept. 2020 – Oct. 2022 Aerie Phoenix, Arizona</li>
-                <li>Lifeguard Swim Instructor City of Litchfield Recreation Center May 2019 – Aug. 2021</li>
-                <li>Hostess Reds Bar and Grill Dec. 2019 – June 2020</li>
-            </ul>
+        <li class="nav-item">
+          <a href="../html/resume.html" class="nav-link px-2 text-muted"
+            >Resume</a
+          >
         </li>
-        <li id="ski"class="resumelistheading">Skills
-            <ul>
-                <li>Bilingual - Spanish</li>
-                <li> Advanced communication/interpersonal skills</li>
-                <li>Strong organizational and leadership capabilities</li>
-            </ul>
-            <a href="#top">Back to Top</a>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-             <p>&nbsp;</p>
-
+        <li class="nav-item">
+          <a href="../html/aboutMe.html" class="nav-link px-2 text-muted"
+            >About Me</a
+          >
         </li>
-    </ol>
-</body>
+      </ul>
+      <p class="text-center text-muted">&copy; 2025 Natalie Wolfley</p>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
